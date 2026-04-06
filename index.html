@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메타치타 | 요식업 전문 마케팅 대행사</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.css" rel="stylesheet">
+<style>
+@font-face{font-family:'GmarketSansBold';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:normal;font-style:normal}
+@font-face{font-family:'GmarketSansLight';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:normal;font-style:normal}
+
+:root{
+  --bg:#0a0a0a;--bg2:#111;--bg3:#161616;--bg4:#1c1c1c;
+  --primary:#3B82F6;--primary-dark:#2563EB;--primary-bright:#60A5FA;--primary-glow:rgba(59,130,246,.12);
+  --accent:#F59E0B;--accent-bright:#FBBF24;--accent-glow:rgba(245,158,11,.1);
+  --text:#F0F0F0;--text-sub:rgba(255,255,255,.6);--text-muted:rgba(255,255,255,.35);
+  --border:rgba(255,255,255,.06);--border-light:rgba(255,255,255,.1);
+  --gold:linear-gradient(135deg,#BF953F,#FCF6BA,#B38728);--gold-solid:#C9A84C;
+  --line-o:rgba(59,130,246,.2);--card-shadow:0 8px 32px rgba(0,0,0,.4)
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:22px}
+body{font-family:'Noto Sans KR','GmarketSansMedium',sans-serif;color:var(--text);background:var(--bg);line-height:1.8;overflow-x:hidden;font-weight:400;-webkit-font-smoothing:antialiased}
+.hl{color:var(--accent-bright);font-weight:900}
+.hl-box{background:var(--accent);color:#000;font-weight:900;padding:2px 10px;border-radius:4px;display:inline}
+.hl-blue{color:var(--primary-bright);font-weight:900}
+.hl-red-tilt{color:#EF4444;font-weight:900;font-size:2em;display:inline-block;transform:rotate(15deg);margin:0 4px;line-height:1}
+
+/* GNB */
+.gnb{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border-light);transition:all .3s;height:64px}
+.gnb.scrolled{box-shadow:0 2px 24px rgba(0,0,0,.5)}
+.gnb-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px}
+.logo{font-family:'GmarketSansBold',sans-serif;font-size:24px;font-weight:900;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo img{height:40px;width:auto;border-radius:10px}
+.gnb-nav{display:flex;gap:28px;align-items:center;list-style:none}
+.gnb-nav a{text-decoration:none;color:var(--text-sub);font-size:.9rem;font-weight:500;transition:color .2s}
+.gnb-nav a:hover{color:#fff}
+.gnb-cta{background:var(--accent);color:#000;border:none;padding:10px 24px;border-radius:8px;font-size:.85rem;font-weight:800;cursor:pointer;transition:all .2s;text-decoration:none;font-family:'GmarketSansBold',sans-serif;white-space:nowrap}
+.gnb-cta:hover{background:var(--accent-bright);transform:translateY(-1px)}
+.mobile-toggle{display:none;background:none;border:none;cursor:pointer;width:40px;height:40px;position:relative}
+.mobile-toggle span{display:block;width:22px;height:2px;background:#fff;position:absolute;left:9px;transition:all .3s}
+.mobile-toggle span:nth-child(1){top:13px}.mobile-toggle span:nth-child(2){top:19px}.mobile-toggle span:nth-child(3){top:25px}
+
+/* SIDE CTA */
+.side-cta{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:999}
+.side-cta a{display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;text-orientation:mixed;background:var(--accent);color:#000;text-decoration:none;padding:24px 16px;font-size:.95rem;font-weight:900;letter-spacing:3px;transition:all .3s;border-radius:12px 0 0 12px;box-shadow:-4px 0 28px rgba(245,158,11,.3);font-family:'GmarketSansBold',sans-serif;position:relative;overflow:hidden}
+.side-cta a::after{content:'';position:absolute;top:-100%;left:0;right:0;height:100%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.2),transparent);animation:sideShine 2.5s ease-in-out infinite;pointer-events:none}
+@keyframes sideShine{0%,100%{top:-100%}50%{top:100%}}
+.side-cta a:hover{padding-right:22px;background:var(--accent-bright)}
+
+/* MOBILE BOTTOM CTA — AMPM style */
+.mobile-bottom-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:1000;background:var(--accent);box-shadow:0 -4px 24px rgba(245,158,11,.3)}
+.mobile-bottom-inner{display:flex;align-items:center;gap:8px;padding:10px 12px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+.mobile-bottom-cta input{flex:1;padding:12px 14px;border-radius:8px;border:none;background:#fff;color:#333;font-size:.9rem;font-family:inherit;outline:none;min-width:0}
+.mobile-bottom-cta input::placeholder{color:#999}
+.mobile-bottom-cta button{padding:12px 20px;border-radius:8px;border:none;background:#000;color:#fff;font-size:.9rem;font-weight:800;font-family:'GmarketSansBold',sans-serif;cursor:pointer;white-space:nowrap}
+
+/* HERO */
+.hero{padding:130px 24px 90px;background:var(--bg);position:relative;overflow:hidden;text-align:center;margin-top:64px}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(59,130,246,.06) 0%,transparent 70%)}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.hero-logo{width:130px;height:auto;margin:0 auto 28px;border-radius:20px;display:block}
+.hero-pretitle{font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--text-sub);margin-bottom:24px;font-weight:500;letter-spacing:1px}
+.hero-pretitle span{color:var(--accent-bright);font-weight:800}
+.hero h1{font-family:'GmarketSansBold',sans-serif;font-size:clamp(2.4rem,7.5vw,5.5rem);font-weight:900;color:#fff;line-height:1.2;margin-bottom:0;letter-spacing:-2px;word-break:keep-all;white-space:nowrap}
+.hero-headline-block{background:var(--primary);display:block;padding:32px 0 36px;margin-left:-9999px;margin-right:-9999px;padding-left:9999px;padding-right:9999px;margin-bottom:32px;text-align:center}
+.hero-sub{font-size:clamp(1.3rem,3.5vw,2rem);color:var(--text-sub);margin-bottom:48px;line-height:1.85;word-break:keep-all}
+.hero-cases{display:flex;flex-direction:column;gap:2px;margin-bottom:48px;max-width:700px;margin-left:auto;margin-right:auto;border-radius:18px;overflow:hidden;border:1px solid var(--border-light)}
+.hero-case-card{background:var(--bg3);padding:36px 32px;text-align:center;transition:background .3s}
+.hero-case-card:hover{background:var(--bg4)}
+.hero-case-label{font-size:1rem;color:var(--text-muted);font-weight:500;margin-bottom:10px;letter-spacing:1px}
+.hero-case-value{font-family:'GmarketSansBold',sans-serif;font-size:clamp(2.2rem,6vw,3.6rem);font-weight:900;color:var(--primary-bright);line-height:1.2;margin-bottom:10px}
+.hero-case-desc{font-size:1rem;color:var(--text-muted);font-weight:400}
+.hero-cta-group{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;border:none;padding:18px 44px;border-radius:12px;font-size:1.15rem;font-weight:800;cursor:pointer;transition:all .3s;text-decoration:none;font-family:'GmarketSansBold',sans-serif;box-shadow:0 6px 28px rgba(59,130,246,.3)}
+.btn-primary:hover{background:var(--primary-bright);transform:translateY(-3px)}
+.btn-accent{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#000;border:none;padding:18px 44px;border-radius:12px;font-size:1.15rem;font-weight:800;cursor:pointer;transition:all .3s;text-decoration:none;font-family:'GmarketSansBold',sans-serif;box-shadow:0 6px 28px rgba(245,158,11,.3)}
+.btn-accent:hover{background:var(--accent-bright);transform:translateY(-3px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text);border:2px solid var(--border-light);padding:18px 36px;border-radius:12px;font-size:1rem;font-weight:500;cursor:pointer;transition:all .3s;text-decoration:none}
+.btn-secondary:hover{border-color:var(--primary-bright);color:var(--primary-bright)}
+
+/* PARTNERS */
+.partners{padding:24px 0;background:var(--bg2);overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.partners-label{text-align:center;font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:4px;font-weight:500;margin-bottom:16px}
+.partners-track{display:flex;gap:14px;animation:scrollPartners 28s linear infinite;width:max-content}
+@keyframes scrollPartners{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.partner-box{flex-shrink:0;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 28px;font-size:.9rem;font-weight:600;color:var(--text-sub);white-space:nowrap;transition:all .3s;display:flex;align-items:center;gap:8px}
+.partner-box:hover{border-color:var(--line-o);color:var(--primary-bright);transform:translateY(-2px)}
+
+/* HOOK SECTION */
+.hook-section{padding:100px 24px;text-align:center}
+.hook-inner{max-width:850px;margin:0 auto}
+.hook-question{font-family:'GmarketSansBold',sans-serif;font-size:clamp(2rem,7vw,4rem);font-weight:900;color:var(--text-sub);line-height:1.35;margin-bottom:24px;word-break:keep-all}
+.hook-answer{font-family:'GmarketSansBold',sans-serif;font-size:clamp(2.8rem,10vw,6rem);font-weight:900;color:#fff;line-height:1.2;margin-bottom:24px;word-break:keep-all}
+.hook-sub{font-size:clamp(1.2rem,3vw,1.8rem);color:var(--text-sub);line-height:1.85;margin-bottom:40px;word-break:keep-all}
+.hook-highlight-bar{display:inline-block;background:var(--primary);color:#fff;padding:18px 44px;border-radius:12px;font-family:'GmarketSansBold',sans-serif;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:800;box-shadow:0 4px 20px rgba(59,130,246,.25)}
+
+/* SECTIONS */
+.section{padding:100px 32px}
+.section-inner{max-width:1200px;margin:0 auto;text-align:center}
+.section-label{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--primary-bright);text-transform:uppercase;letter-spacing:3px;font-weight:600;margin-bottom:16px;padding:8px 18px;border-radius:20px;background:var(--primary-glow);border:1px solid var(--line-o)}
+.section-title{font-family:'GmarketSansBold',sans-serif;font-size:clamp(2.4rem,8vw,5rem);font-weight:900;line-height:1.25;margin-bottom:24px;letter-spacing:-2px;color:#fff;word-break:keep-all}
+.section-desc{font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--text-sub);max-width:800px;line-height:1.85;margin:0 auto 48px;word-break:keep-all}
+
+/* IDENTITY */
+.identity{background:var(--bg2)}
+.identity-card{background:var(--bg3);border-radius:20px;padding:60px 48px;box-shadow:var(--card-shadow);border:1px solid var(--border-light);position:relative;overflow:hidden;text-align:center}
+.identity-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--primary))}
+.identity-quote{font-family:'GmarketSansBold',sans-serif;font-size:clamp(1.8rem,5vw,3.4rem);font-weight:900;line-height:1.45;margin-bottom:36px;color:#fff;word-break:keep-all}
+.identity-quote em{font-style:normal;color:var(--accent-bright)}
+.identity-body{font-size:clamp(1.2rem,3vw,1.6rem);color:var(--text-sub);line-height:2.1;max-width:850px;margin:0 auto;word-break:keep-all}
+.identity-body strong{color:var(--primary-bright);font-weight:800}
+
+/* PROCESS */
+.process-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;text-align:center}
+.process-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:40px 28px;transition:all .3s;position:relative;overflow:hidden}
+.process-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.process-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.4);border-color:var(--line-o)}
+.process-step{font-size:.75rem;font-weight:700;color:var(--accent-bright);letter-spacing:3px;margin-bottom:16px}
+.process-icon{width:64px;height:64px;border-radius:14px;background:var(--primary-glow);border:1px solid var(--line-o);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.6rem}
+.process-card h3{font-family:'GmarketSansBold',sans-serif;font-size:1.5rem;font-weight:900;margin-bottom:12px;color:#fff;word-break:keep-all}
+.process-card-sub{font-size:1.15rem;color:var(--accent-bright);font-weight:600;margin-bottom:16px;word-break:keep-all}
+.process-card p{font-size:1.1rem;color:var(--text-sub);line-height:1.8;word-break:keep-all}
+
+/* EMPATHY */
+.empathy{background:linear-gradient(135deg,#1e3a6e 0%,#2563EB 50%,#1e40af 100%);padding:100px 24px;text-align:center;position:relative;overflow:hidden}
+.empathy::before{content:'';position:absolute;top:-50%;right:-30%;width:600px;height:600px;background:radial-gradient(circle,rgba(245,158,11,.15) 0%,transparent 70%);border-radius:50%}
+.empathy-inner{max-width:800px;margin:0 auto;position:relative;z-index:1}
+.empathy h2{font-family:'GmarketSansBold',sans-serif;font-size:clamp(2rem,6vw,4rem);font-weight:900;color:#fff;line-height:1.5;margin-bottom:40px;word-break:keep-all}
+.empathy p{font-size:clamp(1.2rem,3vw,1.8rem);color:rgba(255,255,255,.85);margin-bottom:44px;word-break:keep-all}
+.btn-white{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--primary-dark);border:none;padding:18px 44px;border-radius:12px;font-size:1.15rem;font-weight:800;cursor:pointer;transition:all .3s;text-decoration:none;font-family:'GmarketSansBold',sans-serif}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.2)}
+
+/* SERVICES */
+.services{background:var(--bg2);color:#fff}
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;text-align:left;max-width:1100px;margin:0 auto}
+.service-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:36px 32px;transition:all .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.service-card:hover{border-color:var(--line-o);transform:translateY(-6px);box-shadow:0 24px 56px rgba(0,0,0,.3)}
+.service-num{font-family:'GmarketSansBold',sans-serif;font-size:2.6rem;font-weight:900;color:rgba(59,130,246,.1);line-height:1;margin-bottom:12px}
+.service-card h3{font-family:'GmarketSansBold',sans-serif;font-size:1.5rem;font-weight:900;margin-bottom:20px;color:#fff}
+.service-tag{display:inline-block;background:var(--accent-glow);color:var(--accent-bright);padding:5px 14px;border-radius:6px;font-size:.85rem;font-weight:700;margin-bottom:14px;border:1px solid rgba(245,158,11,.2);letter-spacing:2px;text-transform:uppercase}
+.service-features{list-style:none;display:flex;flex-direction:column;gap:16px}
+.service-features li{display:flex;gap:12px;align-items:flex-start;font-size:1.1rem;color:var(--text-sub);line-height:1.75;word-break:keep-all}
+.service-features li::before{content:'';flex-shrink:0;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-top:12px}
+.svc-hl{color:var(--accent-bright);font-weight:700;display:inline;font-size:1.1rem;white-space:nowrap}
+
+/* CREATIVE */
+.creative-section{background:var(--bg);padding:80px 24px;text-align:center;overflow:hidden}
+.creative-section h2{font-size:1.1rem;color:var(--text-sub);margin-bottom:12px;font-weight:400}
+.creative-section .big-title{font-family:'GmarketSansBold',sans-serif;font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;color:#fff;margin-bottom:14px}
+.creative-section .big-title em{font-style:normal;color:var(--primary-bright)}
+.creative-section .sub-text{font-size:1rem;color:var(--text-muted);margin-bottom:48px}
+.creative-row{display:flex;gap:14px;margin-bottom:14px;width:max-content}
+.creative-row-1{animation:scrollRight 40s linear infinite}
+.creative-row-2{animation:scrollLeft 40s linear infinite}
+@keyframes scrollRight{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes scrollLeft{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.creative-item{flex-shrink:0;width:180px;height:180px;border-radius:12px;overflow:hidden;background:var(--bg3);transition:all .3s;cursor:pointer;border:1px solid var(--border)}
+.creative-item:hover{transform:scale(1.06);z-index:2;border-color:var(--line-o)}
+.creative-item svg{width:100%;height:100%}
+
+/* CASES */
+.cases-section{background:var(--bg2)}
+.case-block{background:var(--bg3);border-radius:18px;padding:52px 44px;box-shadow:var(--card-shadow);border:1px solid var(--border-light);margin-bottom:32px;text-align:center;position:relative;overflow:hidden}
+.case-block::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--primary))}
+.case-block h3{font-family:'GmarketSansBold',sans-serif;font-size:1.8rem;font-weight:900;margin-bottom:28px;color:#fff;line-height:1.45;word-break:keep-all}
+.case-tag{display:inline-block;background:var(--accent-glow);color:var(--accent-bright);padding:8px 20px;border-radius:8px;font-size:.95rem;font-weight:700;margin-bottom:20px;border:1px solid rgba(245,158,11,.2);letter-spacing:2px}
+.case-img{width:100%;max-width:900px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.3);margin:20px auto;display:block;border:1px solid var(--border)}
+.case-quote{font-family:'GmarketSansBold',sans-serif;font-size:1.5rem;font-weight:900;color:#fff;margin:28px 0 20px;line-height:1.6;word-break:keep-all}
+.case-sub-quote{font-size:1.1rem;color:var(--text-sub);font-style:italic;margin-bottom:28px;padding:18px 24px;border-left:3px solid var(--accent);background:var(--accent-glow);border-radius:0 10px 10px 0;text-align:left;display:inline-block;max-width:700px;word-break:keep-all}
+.case-data-list{list-style:none;text-align:left;display:inline-block;max-width:800px}
+.case-data-list li{font-size:1.1rem;color:var(--text-sub);line-height:2;padding:6px 0;display:flex;gap:12px;align-items:flex-start;word-break:keep-all}
+.case-data-list li::before{content:'';width:8px;height:8px;border-radius:2px;background:var(--accent);flex-shrink:0;margin-top:10px;transform:rotate(45deg)}
+.case-data-list li strong{color:var(--accent-bright);font-weight:800}
+.case-metric-bar{display:flex;gap:0;justify-content:center;margin-top:28px;border-radius:14px;overflow:hidden;border:1px solid var(--border-light)}
+.case-metric-item{text-align:center;flex:1;padding:24px 16px;background:var(--bg4)}
+.case-metric-item+.case-metric-item{border-left:1px solid var(--border-light)}
+.case-metric-label{font-size:.85rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.case-metric-value{font-family:'GmarketSansBold',sans-serif;font-size:2.8rem;font-weight:900;color:var(--accent-bright)}
+.case-metric-value small{font-size:1rem;color:var(--text-sub)}
+
+/* REVIEW — AMPM speech bubble style */
+.review-bubble{background:var(--bg3);border:1px solid var(--border-light);border-radius:16px;padding:40px 44px;text-align:left;position:relative;max-width:100%;width:100%;word-break:keep-all}
+.review-bubble-title{font-family:'GmarketSansBold',sans-serif;font-size:clamp(1.3rem,3.5vw,1.8rem);font-weight:900;color:#fff;margin-bottom:14px}
+.review-stars{font-size:1.3rem;color:var(--accent);letter-spacing:3px;margin-bottom:10px}
+.review-bubble-body{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--text-sub);line-height:1.85}
+.review-bubble-author{margin-top:16px;font-size:.95rem;font-weight:700;color:var(--accent-bright)}
+.review-left{align-self:flex-start;border-bottom-left-radius:4px;max-width:92%}
+.review-right{align-self:flex-end;border-bottom-right-radius:4px;max-width:92%}
+
+/* WHY */
+.why-card{background:var(--bg3);border-radius:18px;padding:56px 40px;text-align:center;color:#fff;border:1px solid var(--border-light);position:relative;overflow:hidden}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--primary))}
+.why-card h3{font-family:'GmarketSansBold',sans-serif;font-size:2.2rem;font-weight:900;margin-bottom:24px;word-break:keep-all}
+.why-card p{font-size:1.3rem;color:var(--text-sub);max-width:700px;margin:0 auto;word-break:keep-all}
+
+/* CTA */
+.cta-banner{padding:100px 24px;text-align:center;background:var(--bg);position:relative}
+.cta-banner::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 70% 50% at 50% 40%,var(--primary-glow) 0%,transparent 70%)}
+.cta-banner-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.cta-banner h2{font-family:'GmarketSansBold',sans-serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:900;margin-bottom:24px;letter-spacing:-1.5px;color:#fff;word-break:keep-all;line-height:1.4}
+.cta-banner p{font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--text-sub);margin-bottom:48px;word-break:keep-all}
+
+/* FOOTER */
+.footer{background:var(--bg);padding:64px 32px 40px;color:var(--text-muted);border-top:1px solid var(--border)}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px}
+.footer-brand .logo{color:var(--primary-bright);margin-bottom:18px}
+.footer-info{font-size:.85rem;line-height:2.2}
+.footer-links{display:flex;gap:48px;flex-wrap:wrap}
+.footer-links-col h4{color:#fff;font-size:.85rem;font-weight:700;margin-bottom:16px}
+.footer-links-col a{display:block;color:var(--text-muted);text-decoration:none;font-size:.85rem;margin-bottom:12px;transition:color .2s}
+.footer-links-col a:hover{color:var(--primary-bright)}
+.footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-size:.75rem;text-align:center}
+
+/* KAKAO FLOAT */
+.kakao-float{position:fixed;bottom:28px;right:28px;z-index:999;background:#FEE500;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.3);transition:all .3s;text-decoration:none}
+.kakao-float:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(0,0,0,.4)}
+
+/* CONSULT SHEET */
+.consult-sheet{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2000;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+.consult-sheet.active{display:flex}
+.consult-sheet-inner{background:var(--bg3);border:1px solid var(--border-light);border-radius:20px;padding:48px 36px;max-width:480px;width:100%;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.consult-sheet-icon{font-size:3rem;margin-bottom:20px}
+.consult-sheet-inner h3{font-family:'GmarketSansBold',sans-serif;font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:16px}
+.consult-sheet-inner p{font-size:1.05rem;color:var(--text-sub);line-height:1.8;margin-bottom:20px}
+.consult-sheet-info{background:var(--bg4);border-radius:12px;padding:20px;text-align:left;font-size:.9rem;color:var(--text-sub);line-height:2}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  html{font-size:19px}
+  .process-grid,.service-grid{grid-template-columns:1fr}
+  .creative-item{width:150px;height:150px}
+  .case-block{padding:40px 28px}
+}
+@media(max-width:768px){
+  html{font-size:17px}
+  .gnb-nav{display:none}.gnb-cta-desktop{display:none}.mobile-toggle{display:block}
+  .gnb-nav.active{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(10,10,10,.98);backdrop-filter:blur(20px);padding:24px;gap:20px;border-bottom:1px solid var(--border)}
+  .gnb-inner{padding:0 16px}
+  .hero{padding:90px 20px 64px}
+  .hero h1{font-size:clamp(1.55rem,6.8vw,2.8rem);line-height:1.25;white-space:nowrap}
+  .hero-headline-block{padding:20px 0 24px}
+  .hero-pretitle{font-size:1.15rem}
+  .hero-sub{font-size:1.1rem;margin-bottom:32px}
+  .hero-logo{width:100px;margin-bottom:20px}
+  .hero-case-card{padding:28px 20px}
+  .hero-case-value{font-size:clamp(1.8rem,7vw,2.6rem)}
+  .hero-case-label{font-size:.85rem}
+  .hero-case-desc{font-size:.85rem}
+  .hero-cta-group{flex-direction:column;align-items:stretch;gap:10px}
+  .btn-primary,.btn-accent,.btn-secondary{width:100%;justify-content:center;padding:16px 32px;font-size:1.05rem}
+  .hook-section{padding:64px 20px}
+  .hook-question{font-size:clamp(1.5rem,7vw,2.4rem)}
+  .hook-answer{font-size:clamp(2rem,9vw,3.4rem)}
+  .hook-sub{font-size:1.05rem}
+  .hook-highlight-bar{font-size:1.05rem;padding:14px 28px}
+  .section{padding:64px 20px}
+  .section-title{font-size:clamp(1.8rem,8vw,2.8rem);line-height:1.3}
+  .section-desc{font-size:1rem;margin-bottom:32px}
+  .section-label{font-size:.72rem;padding:6px 14px}
+  .identity-card{padding:32px 20px}
+  .identity-quote{font-size:clamp(1.4rem,6vw,2rem)}
+  .identity-body{font-size:1.05rem;line-height:2}
+  .process-card{padding:28px 20px}
+  .process-card h3{font-size:1.05rem}
+  .process-card-sub{font-size:.85rem}
+  .process-card p{font-size:.85rem}
+  .process-icon{width:52px;height:52px;font-size:1.3rem}
+  .empathy{padding:56px 20px}
+  .empathy h2{font-size:clamp(1.5rem,6vw,2.4rem)}
+  .empathy p{font-size:1.05rem;margin-bottom:28px}
+  .btn-white{padding:16px 32px;font-size:1rem;width:100%;justify-content:center}
+  .service-card{padding:24px 20px}
+  .service-card h3{font-size:1.05rem}
+  .service-num{font-size:2rem}
+  .service-features li{font-size:.85rem}
+  .svc-hl{font-size:.85rem}
+  .creative-item{width:130px;height:130px}
+  .case-block{padding:24px 16px}
+  .case-block h3{font-size:1.2rem;line-height:1.45}
+  .case-tag{font-size:.8rem;padding:6px 14px}
+  .case-img{border-radius:8px;margin:12px auto}
+  .case-quote{font-size:1.1rem;margin:16px 0 14px}
+  .case-sub-quote{font-size:.9rem;padding:14px 16px;max-width:100%}
+  .case-data-list{max-width:100%}
+  .case-data-list li{font-size:.9rem;padding:3px 0}
+  .case-metric-bar{border-radius:10px}
+  .case-metric-item{padding:16px 10px}
+  .case-metric-label{font-size:.7rem}
+  .case-metric-value{font-size:1.8rem}
+  .case-metric-value small{font-size:.8rem}
+  .review-card{max-width:100%;padding:24px 18px}
+  .review-card p{font-size:.85rem!important}
+  .why-card{padding:32px 20px}
+  .why-card h3{font-size:1.2rem}
+  .why-card p{font-size:.9rem}
+  .cta-banner{padding:56px 20px}
+  .cta-banner h2{font-size:clamp(1.3rem,5vw,1.8rem)}
+  .cta-banner p{font-size:.9rem;margin-bottom:28px}
+  .partner-box{padding:10px 18px;font-size:.8rem}
+  .footer{padding:40px 20px 28px}
+  .footer-inner{flex-direction:column;gap:28px}
+  .footer-links{gap:32px}
+  .footer-bottom{margin-top:24px;padding-top:16px;font-size:.7rem}
+  .side-cta{display:none}
+  .kakao-float{bottom:80px;width:56px;height:56px}
+  .mobile-bottom-cta{display:block}
+  body{padding-bottom:64px}
+}
+@media(max-width:400px){
+  html{font-size:15px}
+  .hero{padding:80px 16px 48px}
+  .hero h1{font-size:1.35rem}
+  .hero-headline-block{padding:16px 0 20px}
+  .hook-section{padding:48px 16px}
+  .section{padding:48px 16px}
+  .case-block{padding:20px 14px}
+  .empathy{padding:48px 16px}
+  .cta-banner{padding:48px 16px}
+}
+.fade-up{opacity:1;transform:translateY(0);transition:opacity .7s ease,transform .7s ease}
+.fade-up.hidden{opacity:0;transform:translateY(30px)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<header class="gnb" id="gnb">
+  <div class="gnb-inner">
+    <a href="#" class="logo"><img src="metacheetah-logo.jpg" alt="로고"> 메타치타</a>
+    <nav class="gnb-nav" id="gnbNav">
+      <a href="#identity">회사소개</a><a href="#services">서비스</a><a href="#cases">포트폴리오</a><a href="#contact">문의하기</a>
+    </nav>
+    <a href="#contact" class="gnb-cta gnb-cta-desktop">광고상담</a>
+    <button class="mobile-toggle" onclick="document.getElementById('gnbNav').classList.toggle('active')"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="side-cta"><a href="#contact">무료 상담 신청</a></div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <img src="metacheetah-logo.jpg" alt="메타치타" class="hero-logo">
+    <div class="hero-pretitle">실력 있는 마케터와 <span>10년 자영업 경험</span>의</div>
+    <div class="hero-headline-block">
+      <h1>광고비 <span class="hl">100만 원</span>으로<br>매출 <span class="hl-box">1,000만 원</span><br>올리기 프로젝트</h1>
+    </div>
+    <p class="hero-sub">"안 오르셨다고요? 저희는 <strong style="color:var(--accent-bright)">실제 숫자</strong>로 답합니다."</p>
+    <div class="hero-cases">
+      <div class="hero-case-card">
+        <div class="hero-case-label">커머스</div>
+        <div class="hero-case-value">월 1.5억 달성</div>
+        <div class="hero-case-desc">에코후레쉬 · ROAS 300%</div>
+      </div>
+      <div class="hero-case-card">
+        <div class="hero-case-label">요식업</div>
+        <div class="hero-case-value">월 10,000건</div>
+        <div class="hero-case-desc">백야(부평/구월) · 플레이스 유입</div>
+      </div>
+    </div>
+    <div class="hero-cta-group">
+      <a href="#contact" class="btn-accent">무료 상담 신청하기 →</a>
+      <a href="#cases" class="btn-secondary">성공사례 보기</a>
+    </div>
+  </div>
+</section>
+
+<section class="partners">
+  <div class="partners-label">Trusted Partners</div>
+  <div class="partners-track">
+    <div class="partner-box">🛒 에코후레쉬</div><div class="partner-box">🍜 백야 구월</div><div class="partner-box">🍜 백야 부평</div><div class="partner-box">🥗 건밀그린</div><div class="partner-box">🔧 올메이커스</div><div class="partner-box">💇 제로살롱</div><div class="partner-box">😊 헤이피피</div>
+    <div class="partner-box">🛒 에코후레쉬</div><div class="partner-box">🍜 백야 구월</div><div class="partner-box">🍜 백야 부평</div><div class="partner-box">🥗 건밀그린</div><div class="partner-box">🔧 올메이커스</div><div class="partner-box">💇 제로살롱</div><div class="partner-box">😊 헤이피피</div>
+  </div>
+</section>
+
+<section class="hook-section" style="background:var(--bg2)">
+  <div class="hook-inner fade-up">
+    <div class="hook-question">3개월 이상 <span class="hl">광고비</span>를 쓰고 있는데</div>
+    <div class="hook-answer"><span class="hl-box">매출</span>이 <span class="hl-red-tilt">안</span> 오른다면?</div>
+    <div class="hook-sub">대행사를 바꿔야 할 때입니다.<br>메타치타는 <strong style="color:var(--accent-bright)">장사를 아는 마케터</strong>가 직접 운영합니다.</div>
+    <div class="hook-highlight-bar">✓ 10년 자영업 경험 + 현직 방송PD 영상제작</div>
+  </div>
+</section>
+
+<section class="section identity" id="identity">
+  <div class="section-inner">
+    <div class="section-label">Why MetaCheetah</div>
+    <div class="section-title">왜 <span style="color:var(--accent-bright)">메타치타</span>인가?</div>
+    <div class="identity-card fade-up">
+      <div class="identity-quote">"책상 앞 마케터는 모르는,<br><em>진짜 장사꾼의 피눈물</em>"</div>
+      <div class="identity-body">광고 세팅은 누구나 합니다.<br>하지만 <strong>매출을 올리는 건</strong> 아무나 못 합니다.<br><br><span style="color:var(--accent-bright);font-weight:900">메타치타</span>는 <strong>10년 넘게 현장에서 직접 자영업을 하며,<br>내 돈을 써가며 터득한 '진짜 생존 공식'</strong>을 제안합니다.<br><br>이론만 늘어놓는 마케터가 아니라,<br><span class="hl" style="font-size:1.2rem">장사를 아는 파트너</span>를 만나야 합니다.</div>
+    </div>
+  </div>
+</section>
+
+<section class="hook-section" style="background:var(--bg)">
+  <div class="hook-inner fade-up">
+    <div class="hook-question">우리만 <span class="hl">성과</span>가 안 나온다면?</div>
+    <div class="hook-answer">타겟팅과 <span class="hl-box">소재</span>가 문제입니다</div>
+    <div class="hook-sub">메타 광고의 변화에 빠르게 따라가야<br><strong style="color:var(--primary-bright)">퍼포먼스</strong>가 나옵니다.</div>
+  </div>
+</section>
+
+<section class="section" id="process" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-label">Process</div>
+    <div class="section-title">우리는 <span style="color:var(--accent-bright)">4단계</span>로<br>퍼포먼스를 만들어냅니다</div>
+    <div class="section-desc">마케팅 이전에 장사의 본질부터 봅니다.</div>
+    <div class="process-grid">
+      <div class="process-card fade-up"><div class="process-step">STEP 01</div><div class="process-icon">🔍</div><h3>[진단] 10년 경력의 현장 점검</h3><div class="process-card-sub">"마케팅 이전에 장사의 본질부터 봅니다."</div><p>지금 이 순간 가장 필요한 이벤트,<br>매출 1원이라도 더 올릴 수 있는 <span class="hl">실질적 방안 점검.</span></p></div>
+      <div class="process-card fade-up" style="transition-delay:.1s"><div class="process-step">STEP 02</div><div class="process-icon">📍</div><h3>[세팅] 네이버 플레이스 최적화</h3><div class="process-card-sub">"길목부터 지키는 똑똑한 노출"</div><p><span class="hl">메타 광고 연동</span>과 <span class="hl">체험단 활용</span>으로 플레이스 순위의 자연스러운 상승 유도.</p></div>
+      <div class="process-card fade-up" style="transition-delay:.2s"><div class="process-step">STEP 03</div><div class="process-icon">🎯</div><h3>[확산] 타겟팅 SNS 광고 (Meta)</h3><div class="process-card-sub">"내 가게 주변 3km, 진짜 손님에게만 전달"</div><p>광고가 아닌 <span class="hl">'정보'가 되는</span> 고효율 영상 제작 및 지역 정밀 타겟팅.</p></div>
+      <div class="process-card fade-up" style="transition-delay:.3s"><div class="process-step">STEP 04</div><div class="process-icon">⭐</div><h3>[관리] 지속 가능한 리뷰 & 브랜딩</h3><div class="process-card-sub">"한 번 온 손님을 단골로 만드는 시스템"</div><p>뜨내기 손님 방지를 위한 <span class="hl">블로그 체험단</span> 및 <span class="hl">리뷰 이벤트</span> 전략 설계.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="empathy">
+  <div class="empathy-inner">
+    <h2>알고는 있지만<br>장사도 해야 하고 마케팅도 해야 해서,<br>그동안 너무 정신없으셨죠?</h2>
+    <p>이제 <span style="font-weight:900;color:#fff">메타치타</span>가 대신합니다.</p>
+    <a href="#contact" class="btn-white">지금 바로 상담받기 →</a>
+  </div>
+</section>
+
+<section class="section services" id="services">
+  <div class="section-inner">
+    <div class="section-label">Services</div>
+    <div class="section-title"><span style="color:var(--accent-bright)">메타치타</span> <span style="color:var(--primary-bright)">4대</span> 핵심 서비스</div>
+    <div class="section-desc">10년 현장 경험을 바탕으로,<br>매출에 직결되는 서비스만 제공합니다.</div>
+    <div class="service-grid">
+      <div class="service-card fade-up"><div class="service-num">01</div><div class="service-tag">Meta Ads</div><h3>메타(Meta) 타겟 광고 최적화</h3><ul class="service-features"><li><span class="svc-hl">정밀 타겟팅:</span> 매장 반경 3~5km 이내 요식업 고관여 유저 타겟팅</li><li><span class="svc-hl">예산 최적화:</span> 머신러닝 기반, 반응도 높은 시간/연령대에 예산 집중</li><li><span class="svc-hl">성과 기반:</span> 저효율 소재 즉시 교체 및 유사 타겟 확장</li></ul></div>
+      <div class="service-card fade-up" style="transition-delay:.1s"><div class="service-num">02</div><div class="service-tag">Content</div><h3>고효율 콘텐츠 기획 및 제작</h3><ul class="service-features"><li><span class="svc-hl">비주얼:</span> 식욕을 자극하는 고감도 메뉴 이미지 및 그래픽 제작</li><li><span class="svc-hl">숏폼:</span> 릴스, 쇼츠 최적화 15초 임팩트 영상 기획/편집</li><li><span class="svc-hl">후킹 카피:</span> 고객의 Pain Point를 자극하는 방문 명분 설계</li></ul></div>
+      <div class="service-card fade-up" style="transition-delay:.2s"><div class="service-num">03</div><div class="service-tag">Core-Edge</div><h3>블로그 체험단 무제한 지원</h3><ul class="service-features"><li><span class="svc-hl">무제한:</span> 3개월 계약 기간 내 모집 인원/횟수 제한 없음 (추가 비용 0원)</li><li><span class="svc-hl">키워드:</span> 지역 메인 키워드 상위 노출 가이드 및 철저한 검수</li><li><span class="svc-hl">전환:</span> 누적 리뷰를 통해 광고 유입 고객의 최종 방문 확신 유도</li></ul></div>
+      <div class="service-card fade-up" style="transition-delay:.3s"><div class="service-num">04</div><div class="service-tag">Naver Place</div><h3>네이버 플레이스 통합 관리</h3><ul class="service-features"><li><span class="svc-hl">최적화:</span> 썸네일, 소개 문구 재구성을 통한 클릭률(CTR) 개선</li><li><span class="svc-hl">SA 운영:</span> 유효 키워드 입찰가 관리 및 부정 클릭 모니터링</li><li><span class="svc-hl">리포트:</span> '저장/길찾기/전화하기' 지표 분석 및 월간 리포트</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="creative-section">
+  <h2>메타치타가 직접 제작하는</h2>
+  <div class="big-title">전환율 높은 <em>광고 소재</em></div>
+  <div class="sub-text">현직 방송 PD가 직접 기획 · 편집합니다</div>
+  <div class="creative-row creative-row-1">
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a1a28"/><rect x="20" y="30" width="160" height="140" rx="12" fill="#112240"/><text x="100" y="65" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">오픈 기념</text><text x="100" y="95" text-anchor="middle" fill="#3B82F6" font-size="28" font-weight="bold">FREE</text><text x="100" y="120" text-anchor="middle" fill="#aaa" font-size="10">음료 1잔 무료</text><rect x="55" y="140" width="90" height="22" rx="11" fill="#3B82F6"/><text x="100" y="155" text-anchor="middle" fill="#fff" font-size="9" font-weight="bold">쿠폰 받기</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a1a0a"/><rect x="10" y="10" width="180" height="180" rx="20" fill="#2a2a10"/><text x="100" y="50" text-anchor="middle" fill="#F59E0B" font-size="10" font-weight="bold">✨ 프리미엄 코스</text><rect x="30" y="65" width="140" height="70" rx="10" fill="#3a3a20"/><text x="100" y="95" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">스페셜 디너</text><rect x="55" y="170" width="90" height="20" rx="10" fill="#F59E0B"/><text x="100" y="184" text-anchor="middle" fill="#000" font-size="9" font-weight="bold">예약하기</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a20"/><circle cx="100" cy="100" r="75" fill="none" stroke="#3B82F6" stroke-width="4" stroke-dasharray="12 6" opacity=".3"/><text x="100" y="75" text-anchor="middle" fill="#fff" font-size="10">타임 세일</text><text x="100" y="105" text-anchor="middle" fill="#60A5FA" font-size="22" font-weight="bold">17:00</text><text x="100" y="160" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">30% OFF</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a20"/><rect x="0" y="0" width="200" height="50" fill="#3B82F6"/><text x="100" y="32" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">단골 혜택</text><text x="100" y="85" text-anchor="middle" fill="#fff" font-size="10">방문 5회마다</text><text x="100" y="115" text-anchor="middle" fill="#60A5FA" font-size="20" font-weight="bold">1만원</text><rect x="50" y="158" width="100" height="24" rx="12" fill="#3B82F6"/><text x="100" y="174" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">참여하기</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a20"/><text x="100" y="40" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">🎯 A/B 테스트</text><rect x="20" y="55" width="70" height="110" rx="8" fill="#1a1a3a"/><rect x="110" y="55" width="70" height="110" rx="8" fill="#1a1a3a"/><text x="55" y="100" text-anchor="middle" fill="#888" font-size="9">소재 A</text><text x="145" y="100" text-anchor="middle" fill="#4ade80" font-size="9">소재 B</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a100a"/><rect x="15" y="15" width="170" height="170" rx="18" fill="#2a1a0a"/><text x="100" y="50" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">🍔 세트 메뉴</text><circle cx="70" cy="105" r="30" fill="#3a2a1a"/><circle cx="130" cy="105" r="30" fill="#3a2a1a"/><text x="100" y="165" text-anchor="middle" fill="#60A5FA" font-size="14" font-weight="bold">₩8,900</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#100a1a"/><text x="100" y="35" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">인스타 인기 맛집</text><rect x="25" y="45" width="150" height="100" rx="10" fill="#2a1a3a"/><text x="100" y="85" text-anchor="middle" fill="#3B82F6" font-size="28" font-weight="bold">❤️</text><text x="100" y="115" text-anchor="middle" fill="#aaa" font-size="9">좋아요 2,847개</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a1a1a"/><rect x="20" y="25" width="160" height="55" rx="10" fill="#1a2a2a"/><text x="100" y="48" text-anchor="middle" fill="#4ade80" font-size="10">🏷️ 네이버 플레이스</text><text x="100" y="65" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">상위 노출</text><rect x="30" y="95" width="140" height="35" rx="6" fill="#1a2a2a"/><rect x="32" y="97" width="100" height="31" rx="5" fill="#4ade80" opacity=".2"/><text x="100" y="118" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="bold">CTR +42%</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a0a0a"/><text x="100" y="40" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">🎬 릴스 제작</text><rect x="35" y="50" width="130" height="95" rx="10" fill="#1a1020"/><polygon points="90,90 90,110 110,100" fill="#3B82F6"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0d0d1a"/><polygon points="100,20 180,90 145,170 55,170 20,90" fill="none" stroke="#3B82F6" stroke-width="1.5" opacity=".4"/><text x="100" y="70" text-anchor="middle" fill="#FBBF24" font-size="24" font-weight="bold">300%</text><text x="100" y="90" text-anchor="middle" fill="#fff" font-size="10">ROAS 달성</text></svg></div>
+    <!-- row1 duplicates -->
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a1a28"/><rect x="20" y="30" width="160" height="140" rx="12" fill="#112240"/><text x="100" y="65" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">오픈 기념</text><text x="100" y="95" text-anchor="middle" fill="#3B82F6" font-size="28" font-weight="bold">FREE</text><rect x="55" y="140" width="90" height="22" rx="11" fill="#3B82F6"/><text x="100" y="155" text-anchor="middle" fill="#fff" font-size="9" font-weight="bold">쿠폰 받기</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a1a0a"/><rect x="10" y="10" width="180" height="180" rx="20" fill="#2a2a10"/><text x="100" y="50" text-anchor="middle" fill="#F59E0B" font-size="10" font-weight="bold">✨ 프리미엄 코스</text><rect x="30" y="65" width="140" height="70" rx="10" fill="#3a3a20"/><text x="100" y="95" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">스페셜 디너</text><rect x="55" y="170" width="90" height="20" rx="10" fill="#F59E0B"/><text x="100" y="184" text-anchor="middle" fill="#000" font-size="9" font-weight="bold">예약하기</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a20"/><circle cx="100" cy="100" r="75" fill="none" stroke="#3B82F6" stroke-width="4" stroke-dasharray="12 6" opacity=".3"/><text x="100" y="75" text-anchor="middle" fill="#fff" font-size="10">타임 세일</text><text x="100" y="105" text-anchor="middle" fill="#60A5FA" font-size="22" font-weight="bold">17:00</text><text x="100" y="160" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">30% OFF</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a20"/><rect x="0" y="0" width="200" height="50" fill="#3B82F6"/><text x="100" y="32" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">단골 혜택</text><text x="100" y="85" text-anchor="middle" fill="#fff" font-size="10">방문 5회마다</text><text x="100" y="115" text-anchor="middle" fill="#60A5FA" font-size="20" font-weight="bold">1만원</text><rect x="50" y="158" width="100" height="24" rx="12" fill="#3B82F6"/><text x="100" y="174" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">참여하기</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a20"/><text x="100" y="40" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">🎯 A/B 테스트</text><rect x="20" y="55" width="70" height="110" rx="8" fill="#1a1a3a"/><rect x="110" y="55" width="70" height="110" rx="8" fill="#1a1a3a"/><text x="55" y="100" text-anchor="middle" fill="#888" font-size="9">소재 A</text><text x="145" y="100" text-anchor="middle" fill="#4ade80" font-size="9">소재 B</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a100a"/><rect x="15" y="15" width="170" height="170" rx="18" fill="#2a1a0a"/><text x="100" y="50" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">🍔 세트 메뉴</text><circle cx="70" cy="105" r="30" fill="#3a2a1a"/><circle cx="130" cy="105" r="30" fill="#3a2a1a"/><text x="100" y="165" text-anchor="middle" fill="#60A5FA" font-size="14" font-weight="bold">₩8,900</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#100a1a"/><text x="100" y="35" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">인스타 인기 맛집</text><rect x="25" y="45" width="150" height="100" rx="10" fill="#2a1a3a"/><text x="100" y="85" text-anchor="middle" fill="#3B82F6" font-size="28" font-weight="bold">❤️</text><text x="100" y="115" text-anchor="middle" fill="#aaa" font-size="9">좋아요 2,847개</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a1a1a"/><rect x="20" y="25" width="160" height="55" rx="10" fill="#1a2a2a"/><text x="100" y="48" text-anchor="middle" fill="#4ade80" font-size="10">🏷️ 네이버 플레이스</text><text x="100" y="65" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">상위 노출</text><rect x="30" y="95" width="140" height="35" rx="6" fill="#1a2a2a"/><rect x="32" y="97" width="100" height="31" rx="5" fill="#4ade80" opacity=".2"/><text x="100" y="118" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="bold">CTR +42%</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a0a0a"/><text x="100" y="40" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">🎬 릴스 제작</text><rect x="35" y="50" width="130" height="95" rx="10" fill="#1a1020"/><polygon points="90,90 90,110 110,100" fill="#3B82F6"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0d0d1a"/><polygon points="100,20 180,90 145,170 55,170 20,90" fill="none" stroke="#3B82F6" stroke-width="1.5" opacity=".4"/><text x="100" y="70" text-anchor="middle" fill="#FBBF24" font-size="24" font-weight="bold">300%</text><text x="100" y="90" text-anchor="middle" fill="#fff" font-size="10">ROAS 달성</text></svg></div>
+  </div>
+  <div class="creative-row creative-row-2">
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0f1a"/><rect x="15" y="15" width="170" height="170" rx="16" fill="#101828"/><text x="100" y="50" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">📍 내 주변 3km</text><circle cx="100" cy="100" r="40" fill="none" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="4"/><circle cx="100" cy="100" r="6" fill="#3B82F6"/><text x="100" y="160" text-anchor="middle" fill="#fff" font-size="10">정밀 지역 타겟팅</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a1a"/><rect x="20" y="20" width="160" height="40" rx="8" fill="#3B82F6"/><text x="100" y="46" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">리뷰 이벤트</text><rect x="25" y="75" width="150" height="25" rx="6" fill="#1a1a2e"/><text x="100" y="92" text-anchor="middle" fill="#aaa" font-size="9">⭐ "분위기 너무 좋아요!"</text><rect x="25" y="108" width="150" height="25" rx="6" fill="#1a1a2e"/><text x="100" y="125" text-anchor="middle" fill="#aaa" font-size="9">⭐ "재방문 의사 100%"</text><rect x="25" y="141" width="150" height="25" rx="6" fill="#1a1a2e"/><text x="100" y="158" text-anchor="middle" fill="#aaa" font-size="9">⭐ "가성비 최고입니다"</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0f1a0a"/><text x="100" y="40" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="bold">📈 월간 리포트</text><polyline points="30,140 60,120 90,90 120,100 150,60 180,50" fill="none" stroke="#4ade80" stroke-width="2.5"/><circle cx="150" cy="60" r="4" fill="#3B82F6"/><rect x="25" y="155" width="35" height="30" rx="3" fill="#1a2a1a"/><rect x="68" y="145" width="35" height="40" rx="3" fill="#1a2a1a"/><rect x="111" y="135" width="35" height="50" rx="3" fill="#1a2a1a"/><rect x="154" y="120" width="35" height="65" rx="3" fill="#3B82F6" opacity=".5"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a1a1a"/><rect x="0" y="0" width="200" height="60" fill="#3B82F6"/><text x="100" y="28" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">2+1 이벤트</text><text x="100" y="48" text-anchor="middle" fill="#fff" font-size="9">이번 주말까지만!</text><rect x="30" y="75" width="140" height="80" rx="10" fill="#2a2a2a"/><text x="100" y="110" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">₩9,900</text><rect x="50" y="165" width="100" height="24" rx="12" fill="#3B82F6"/><text x="100" y="181" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">바로가기</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0d1117"/><rect x="15" y="15" width="170" height="170" rx="12" fill="none" stroke="#3B82F6" stroke-width="2"/><text x="100" y="55" text-anchor="middle" fill="#FBBF24" font-size="11" font-weight="bold">🔥 오늘만 이 가격</text><rect x="35" y="70" width="130" height="60" rx="8" fill="#1a1a2e"/><text x="100" y="95" text-anchor="middle" fill="#fff" font-size="22" font-weight="bold">50%</text><rect x="50" y="145" width="100" height="28" rx="14" fill="#3B82F6"/><text x="100" y="164" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">지금 예약 →</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a1a2e"/><circle cx="100" cy="80" r="50" fill="#3B82F6" opacity=".2"/><circle cx="100" cy="80" r="35" fill="#3B82F6" opacity=".4"/><circle cx="100" cy="80" r="20" fill="#3B82F6"/><text x="100" y="86" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">NEW</text><text x="100" y="150" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">시그니처 메뉴</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a1628"/><rect x="10" y="10" width="180" height="80" rx="10" fill="#162040"/><text x="100" y="35" text-anchor="middle" fill="#F59E0B" font-size="10" font-weight="bold">⭐⭐⭐⭐⭐</text><text x="100" y="55" text-anchor="middle" fill="#fff" font-size="11">"여기 진짜 맛있어요"</text><rect x="20" y="100" width="75" height="85" rx="8" fill="#1a2a4e"/><rect x="105" y="100" width="75" height="85" rx="8" fill="#1a2a4e"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a180a"/><rect x="20" y="20" width="160" height="65" rx="10" fill="#1a2a1a"/><text x="100" y="45" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="bold">🥬 건강한 한 끼</text><text x="100" y="68" text-anchor="middle" fill="#fff" font-size="11">샐러드 정기구독</text><rect x="20" y="95" width="75" height="85" rx="8" fill="#1a2a1a"/><rect x="105" y="95" width="75" height="85" rx="8" fill="#1a2a1a"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a0a1a"/><text x="100" y="45" text-anchor="middle" fill="#fff" font-size="10">15초 숏폼 영상</text><rect x="40" y="55" width="120" height="80" rx="8" fill="#2a1a2a"/><polygon points="90,85 90,105 110,95" fill="#3B82F6"/><rect x="55" y="150" width="90" height="8" rx="4" fill="#333"/><rect x="55" y="150" width="60" height="8" rx="4" fill="#3B82F6"/><text x="100" y="195" text-anchor="middle" fill="#60A5FA" font-size="9" font-weight="bold">조회수 폭발 콘텐츠</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a1a2e"/><rect x="20" y="20" width="160" height="100" rx="8" fill="#2a2a4e"/><circle cx="100" cy="70" r="30" fill="#3B82F6" opacity=".8"/><text x="100" y="76" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">SALE</text><rect x="30" y="135" width="140" height="12" rx="4" fill="#3B82F6"/><text x="100" y="180" text-anchor="middle" fill="#888" font-size="10">맛집 특가 이벤트</text></svg></div>
+    <!-- row2 duplicates -->
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0f1a"/><rect x="15" y="15" width="170" height="170" rx="16" fill="#101828"/><text x="100" y="50" text-anchor="middle" fill="#60A5FA" font-size="10" font-weight="bold">📍 내 주변 3km</text><circle cx="100" cy="100" r="40" fill="none" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="4"/><circle cx="100" cy="100" r="6" fill="#3B82F6"/><text x="100" y="160" text-anchor="middle" fill="#fff" font-size="10">정밀 지역 타겟팅</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a1a"/><rect x="20" y="20" width="160" height="40" rx="8" fill="#3B82F6"/><text x="100" y="46" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">리뷰 이벤트</text><rect x="25" y="75" width="150" height="25" rx="6" fill="#1a1a2e"/><text x="100" y="92" text-anchor="middle" fill="#aaa" font-size="9">⭐ "분위기 너무 좋아요!"</text><rect x="25" y="108" width="150" height="25" rx="6" fill="#1a1a2e"/><text x="100" y="125" text-anchor="middle" fill="#aaa" font-size="9">⭐ "재방문 의사 100%"</text><rect x="25" y="141" width="150" height="25" rx="6" fill="#1a1a2e"/><text x="100" y="158" text-anchor="middle" fill="#aaa" font-size="9">⭐ "가성비 최고입니다"</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0f1a0a"/><text x="100" y="40" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="bold">📈 월간 리포트</text><polyline points="30,140 60,120 90,90 120,100 150,60 180,50" fill="none" stroke="#4ade80" stroke-width="2.5"/><circle cx="150" cy="60" r="4" fill="#3B82F6"/><rect x="25" y="155" width="35" height="30" rx="3" fill="#1a2a1a"/><rect x="68" y="145" width="35" height="40" rx="3" fill="#1a2a1a"/><rect x="111" y="135" width="35" height="50" rx="3" fill="#1a2a1a"/><rect x="154" y="120" width="35" height="65" rx="3" fill="#3B82F6" opacity=".5"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a1a1a"/><rect x="0" y="0" width="200" height="60" fill="#3B82F6"/><text x="100" y="28" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">2+1 이벤트</text><text x="100" y="48" text-anchor="middle" fill="#fff" font-size="9">이번 주말까지만!</text><rect x="30" y="75" width="140" height="80" rx="10" fill="#2a2a2a"/><text x="100" y="110" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">₩9,900</text><rect x="50" y="165" width="100" height="24" rx="12" fill="#3B82F6"/><text x="100" y="181" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">바로가기</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0d1117"/><rect x="15" y="15" width="170" height="170" rx="12" fill="none" stroke="#3B82F6" stroke-width="2"/><text x="100" y="55" text-anchor="middle" fill="#FBBF24" font-size="11" font-weight="bold">🔥 오늘만 이 가격</text><rect x="35" y="70" width="130" height="60" rx="8" fill="#1a1a2e"/><text x="100" y="95" text-anchor="middle" fill="#fff" font-size="22" font-weight="bold">50%</text><rect x="50" y="145" width="100" height="28" rx="14" fill="#3B82F6"/><text x="100" y="164" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">지금 예약 →</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a1a2e"/><circle cx="100" cy="80" r="50" fill="#3B82F6" opacity=".2"/><circle cx="100" cy="80" r="35" fill="#3B82F6" opacity=".4"/><circle cx="100" cy="80" r="20" fill="#3B82F6"/><text x="100" y="86" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">NEW</text><text x="100" y="150" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">시그니처 메뉴</text></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a1628"/><rect x="10" y="10" width="180" height="80" rx="10" fill="#162040"/><text x="100" y="35" text-anchor="middle" fill="#F59E0B" font-size="10" font-weight="bold">⭐⭐⭐⭐⭐</text><text x="100" y="55" text-anchor="middle" fill="#fff" font-size="11">"여기 진짜 맛있어요"</text><rect x="20" y="100" width="75" height="85" rx="8" fill="#1a2a4e"/><rect x="105" y="100" width="75" height="85" rx="8" fill="#1a2a4e"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a180a"/><rect x="20" y="20" width="160" height="65" rx="10" fill="#1a2a1a"/><text x="100" y="45" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="bold">🥬 건강한 한 끼</text><text x="100" y="68" text-anchor="middle" fill="#fff" font-size="11">샐러드 정기구독</text><rect x="20" y="95" width="75" height="85" rx="8" fill="#1a2a1a"/><rect x="105" y="95" width="75" height="85" rx="8" fill="#1a2a1a"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a0a1a"/><text x="100" y="45" text-anchor="middle" fill="#fff" font-size="10">15초 숏폼 영상</text><rect x="40" y="55" width="120" height="80" rx="8" fill="#2a1a2a"/><polygon points="90,85 90,105 110,95" fill="#3B82F6"/><rect x="55" y="150" width="90" height="8" rx="4" fill="#333"/><rect x="55" y="150" width="60" height="8" rx="4" fill="#3B82F6"/></svg></div>
+    <div class="creative-item"><svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1a1a2e"/><rect x="20" y="20" width="160" height="100" rx="8" fill="#2a2a4e"/><circle cx="100" cy="70" r="30" fill="#3B82F6" opacity=".8"/><text x="100" y="76" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">SALE</text><rect x="30" y="135" width="140" height="12" rx="4" fill="#3B82F6"/><text x="100" y="180" text-anchor="middle" fill="#888" font-size="10">맛집 특가 이벤트</text></svg></div>
+  </div>
+</section>
+
+<section class="section cases-section" id="cases">
+  <div class="section-inner">
+    <div class="section-label">Portfolio</div>
+    <div class="section-title">10년 자영업의 노하우는<br><span style="color:var(--accent-bright)">'결과'</span>로 증명합니다</div>
+    <div class="section-desc">실적 수치로 검증된 성공 사례를 확인하세요.</div>
+    <div class="case-block fade-up">
+      <div class="case-tag">커머스</div>
+      <h3>에코***대행사 변경 후<br>광고 효율 <span class="hl">ROAS 400%</span> 달성 사례</h3>
+      <img src="ecofresh-ads.jpg" alt="에코후레쉬 광고 데이터" class="case-img">
+      <img src="ecofresh-sales.png" alt="에코후레쉬 매출 데이터" class="case-img">
+      <img src="ecofresh-sales2.png" alt="에코후레쉬 매출 데이터" class="case-img">
+      <div class="case-quote">"월 광고비 4,000만 원 집행,<br>월 매출 <span class="hl">1억 5,000만 원</span> 달성"</div>
+      <div class="case-sub-quote">"관리자 화면의 숫자는 속여도,<br>카페24 실결제 내역은 속일 수 없습니다."</div>
+      <ul class="case-data-list">
+        <li><strong>실전 데이터:</strong> 일일 광고비 <strong>130만 원</strong> 투입 → 일 매출 <strong>500만 원</strong> 고정 추출</li>
+        <li><strong>통합 성과:</strong> 최근 30일 합계 매출 <strong>153,178,594원</strong> (카페24 실적 증빙)</li>
+        <li><strong>핵심 전략:</strong> 단순 노출이 아닌 <span class="hl">'실구매 전환'</span> 위주의 타겟팅 최적화</li>
+        <li>자사몰을 넘어 쿠팡, 스마트스토어 매출까지 동반 상승시키는 <span class="hl">'메타 낙수효과'</span> 설계</li>
+        <li>ROAS <strong>380%~400%</strong> 구간 안정적 유지</li>
+      </ul>
+      <div class="case-metric-bar">
+        <div class="case-metric-item"><div class="case-metric-label">월 매출</div><div class="case-metric-value">1.5<small>억</small></div></div>
+        <div class="case-metric-item"><div class="case-metric-label">ROAS</div><div class="case-metric-value">400<small>%</small></div></div>
+        <div class="case-metric-item"><div class="case-metric-label">30일 합계</div><div class="case-metric-value">1.53<small>억</small></div></div>
+      </div>
+    </div>
+    <div class="case-block fade-up">
+      <div class="case-tag">요식업</div>
+      <h3>대행사 변경 1달만에<br>예약률 <span class="hl">253%</span> 증가<br>(일 2만원 광고비 사용사례)</h3>
+      <img src="baekya-ad.jpg" alt="백야 광고 데이터" class="case-img">
+      <img src="baekya-place.jpg" alt="백야 유입 데이터" class="case-img">
+      <div class="case-quote">"일 광고비 <span class="hl">2만 원</span>으로<br>예약 전화 253% 터뜨렸습니다."</div>
+      <div class="case-sub-quote">"단순 클릭은 누구나 만듭니다.<br>'전화기 버튼'을 누르게 하는 게 진짜 실력입니다."</div>
+      <ul class="case-data-list">
+        <li><strong>플레이스 월 유입:</strong> <strong>11,393회</strong> 달성 (전월 대비 <strong>18% 상승</strong>)</li>
+        <li><strong>문의 성과:</strong> 스마트콜(전화) 문의 전월 대비 <strong>3.5배(253%)</strong> 폭발적 상승</li>
+        <li><strong>유입 경로:</strong> 전체 유입의 30% 이상을 Meta(인스타/페북) 광고로 강제 견인</li>
+        <li><strong>광고 효율:</strong> 일 예산 <strong>20,000원</strong>으로 랜딩 페이지 조회당 <strong>96원</strong>이라는 미친 타겟팅 효율 증명</li>
+      </ul>
+      <div class="case-metric-bar">
+        <div class="case-metric-item"><div class="case-metric-label">월 유입</div><div class="case-metric-value">11,393<small>회</small></div></div>
+        <div class="case-metric-item"><div class="case-metric-label">전화 증가</div><div class="case-metric-value">253<small>%</small></div></div>
+        <div class="case-metric-item"><div class="case-metric-label">조회당 비용</div><div class="case-metric-value">96<small>원</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg)">
+  <div class="section-inner">
+    <div class="section-label">Real Review</div>
+    <div class="section-title">리얼후기</div>
+    <div class="section-desc">실제 고객분들의 생생한 후기를 확인하세요.</div>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:900px;margin:0 auto">
+      <div class="review-bubble review-left fade-up"><div class="review-stars">★★★★★</div><div class="review-bubble-title">대체불가 광고 효율</div><div class="review-bubble-body">광고비 대비 효과가 확실히 달라졌습니다.<br>전에 다니던 대행사와는 차원이 다릅니다.</div><div class="review-bubble-author">— 요식업 사장님 A</div></div>
+      <div class="review-bubble review-right fade-up" style="transition-delay:.1s;background:var(--primary);border-color:var(--primary)"><div class="review-stars" style="color:rgba(255,255,255,.7)">★★★★★</div><div class="review-bubble-title" style="color:rgba(255,255,255,.9)">소자본 고효율 마케팅</div><div class="review-bubble-body" style="color:rgba(255,255,255,.85)">월 2만원으로 이 정도 성과를 낼 줄은 몰랐어요.<br>진짜 장사를 아는 분이라 다릅니다.</div><div class="review-bubble-author" style="color:rgba(255,255,255,.7)">— 백야 대표님</div></div>
+      <div class="review-bubble review-left fade-up" style="transition-delay:.2s"><div class="review-stars">★★★★★</div><div class="review-bubble-title">무제한 체험단의 힘</div><div class="review-bubble-body">체험단 무제한이라 리뷰가 쌓이니까<br>자연 유입이 정말 많이 늘었습니다.</div><div class="review-bubble-author">— 커머스 대표님</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-label">Why MetaCheetah</div>
+    <div class="section-title"><span style="color:var(--accent-bright)">메타치타</span>가 정답인 이유</div>
+    <div class="why-card fade-up">
+      <h3 style="font-size:clamp(2rem,6vw,3.8rem);color:var(--primary-bright);line-height:1.3">현 방송국 PD가 직접<br>광고기획 및 편집</h3>
+      <p style="margin-top:20px">단순 마케터가 아닌, 현직 방송 PD의 감각으로<br>시선을 사로잡는 고효율 영상 소재를<br>직접 기획하고 편집합니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner" id="contact">
+  <div class="cta-banner-inner">
+    <img src="metacheetah-logo.jpg" alt="메타치타" style="width:100px;margin:0 auto 24px;border-radius:16px;display:block">
+    <div class="section-label">Contact</div>
+    <h2>지금 바로<br>현직 마케터와 상담하세요!</h2>
+    <p>매출이 오르지 않는 이유,<br>무료 진단으로 알려드립니다.</p>
+    <div style="max-width:500px;margin:0 auto;text-align:left">
+      <div style="margin-bottom:16px"><label style="display:block;font-size:.8rem;color:var(--accent-bright);font-weight:700;margin-bottom:6px;letter-spacing:1px">성함 *</label><input type="text" id="cName" placeholder="홍길동" style="width:100%;padding:14px 18px;border-radius:10px;border:1px solid var(--border-light);background:var(--bg3);color:var(--text);font-size:.95rem;font-family:inherit;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'"></div>
+      <div style="margin-bottom:16px"><label style="display:block;font-size:.8rem;color:var(--accent-bright);font-weight:700;margin-bottom:6px;letter-spacing:1px">연락처 *</label><input type="tel" id="cPhone" placeholder="010-1234-5678" style="width:100%;padding:14px 18px;border-radius:10px;border:1px solid var(--border-light);background:var(--bg3);color:var(--text);font-size:.95rem;font-family:inherit;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'"></div>
+      <div style="margin-bottom:16px"><label style="display:block;font-size:.8rem;color:var(--accent-bright);font-weight:700;margin-bottom:6px;letter-spacing:1px">업종 / 브랜드명 *</label><input type="text" id="cBiz" placeholder="예: 한식당 / 맛나감자탕" style="width:100%;padding:14px 18px;border-radius:10px;border:1px solid var(--border-light);background:var(--bg3);color:var(--text);font-size:.95rem;font-family:inherit;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'"></div>
+      <div style="margin-bottom:16px"><label style="display:block;font-size:.8rem;color:var(--accent-bright);font-weight:700;margin-bottom:6px;letter-spacing:1px">현재 월 광고비 (선택)</label><select id="cBudget" style="width:100%;padding:14px 18px;border-radius:10px;border:1px solid var(--border-light);background:var(--bg3);color:var(--text);font-size:.95rem;font-family:inherit;outline:none;appearance:none;cursor:pointer"><option value="">선택해 주세요</option><option value="미집행">미집행 (아직 안 하고 있음)</option><option value="50만원 이하">50만원 이하</option><option value="50~100만원">50~100만원</option><option value="100~300만원">100~300만원</option><option value="300만원 이상">300만원 이상</option></select></div>
+      <div style="margin-bottom:24px"><label style="display:block;font-size:.8rem;color:var(--accent-bright);font-weight:700;margin-bottom:6px;letter-spacing:1px">고민 / 문의사항</label><textarea id="cMsg" rows="3" placeholder="현재 겪고 계신 어려움이나 원하시는 마케팅 목표를 자유롭게 적어주세요." style="width:100%;padding:14px 18px;border-radius:10px;border:1px solid var(--border-light);background:var(--bg3);color:var(--text);font-size:.95rem;font-family:inherit;outline:none;resize:vertical;transition:border-color .2s" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'"></textarea></div>
+      <button onclick="submitConsult()" class="btn-accent" style="width:100%;justify-content:center;font-size:1.1rem;padding:18px;border:none;cursor:pointer">무료 진단/상담 신청하기 →</button>
+      <p style="text-align:center;margin-top:14px;font-size:.75rem;color:var(--text-muted)">* 신청 후 담당 마케터가 직접 연락드립니다</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo"><img src="metacheetah-logo.jpg" alt="로고"> 메타치타</a>
+      <div class="footer-info">요식업 전문 마케팅 대행사<br>E-mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="731e160712101b161607121b331d120516015d101c1e">[email&#160;protected]</a></div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-links-col"><h4>서비스</h4><a href="#services">메타 광고 최적화</a><a href="#services">콘텐츠 기획/제작</a><a href="#services">블로그 체험단</a><a href="#services">네이버 플레이스</a></div>
+      <div class="footer-links-col"><h4>메뉴</h4><a href="#identity">회사소개</a><a href="#process">프로세스</a><a href="#cases">포트폴리오</a><a href="#contact">문의하기</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">Copyright © 2025 메타치타(MetaCheetah). All rights reserved.</div>
+</footer>
+
+<a href="https://open.kakao.com/o/s4IkZDoi" target="_blank" class="kakao-float" title="카카오톡 상담">
+  <svg viewBox="0 0 48 48" width="32" height="32"><path d="M24 4C12.95 4 4 11.16 4 20c0 5.72 3.84 10.74 9.6 13.6L12 42l8.4-4.56c1.18.16 2.38.24 3.6.24 11.05 0 20-7.16 20-16S35.05 4 24 4z" fill="#3C1E1E"/><path d="M24 6C13.51 6 6 12.27 6 20c0 5.06 3.44 9.52 8.64 12.16l.8.4-1.12 5.92 5.92-3.2.72.08c1.02.14 2.06.2 3.04.2 10.49 0 18-6.27 18-14S34.49 6 24 6z" fill="#FEE500"/><path d="M15.2 17.6h-2.4v6h2.4c0 .44-.36.8-.8.8H12v1.6h2.4c1.32 0 2.4-1.08 2.4-2.4v-6zm4.8 0h-1.6v8.4H20v-3.2l2.8 3.2h2.08l-3.28-3.6L24.4 18h-2l-2.4 3.04V17.6zM30 17.6l-3.2 8.4h1.76l.64-1.76h3.2l.64 1.76h1.76L31.6 17.6H30zm.8 2.16l1.12 3.08h-2.24l1.12-3.08z" fill="#3C1E1E"/></svg>
+</a>
+
+<!-- 상담 신청 완료 시트 -->
+<div class="consult-sheet" id="consultSheet">
+  <div class="consult-sheet-inner">
+    <div class="consult-sheet-icon">✅</div>
+    <h3>상담 신청이 완료되었습니다!</h3>
+    <p>담당 마케터가 <strong style="color:var(--primary-bright)">24시간 이내</strong>에<br>입력하신 연락처로 연락드리겠습니다.</p>
+    <div class="consult-sheet-info" id="sheetInfo"></div>
+    <button onclick="closeSheet()" class="btn-accent" style="width:100%;justify-content:center;padding:16px;border:none;cursor:pointer;margin-top:20px">확인</button>
+    <a href="https://open.kakao.com/o/s4IkZDoi" target="_blank" style="display:block;text-align:center;margin-top:14px;color:var(--primary-bright);font-size:.9rem;font-weight:600;text-decoration:none">💬 카카오톡으로 바로 상담하기</a>
+  </div>
+</div>
+
+<div class="mobile-bottom-cta">
+  <div class="mobile-bottom-inner">
+    <input type="text" id="mName" placeholder="이름">
+    <input type="tel" id="mPhone" placeholder="연락처">
+    <button onclick="mobileConsult()">문의</button>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+window.addEventListener('scroll',()=>{document.getElementById('gnb').classList.toggle('scrolled',window.scrollY>50)});
+const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>{el.classList.add('hidden');observer.observe(el)});
+// ★★★ 아래 URL을 구글 Apps Script 웹앱 URL로 교체하세요 ★★★
+var GOOGLE_SHEET_URL = 'YOUR_GOOGLE_SHEET_URL_HERE';
+
+function sendToGoogleSheet(data){
+  if(GOOGLE_SHEET_URL==='YOUR_GOOGLE_SHEET_URL_HERE') return;
+  fetch(GOOGLE_SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).catch(function(){});
+}
+
+function submitConsult(){
+  var n=document.getElementById('cName').value.trim(),p=document.getElementById('cPhone').value.trim(),b=document.getElementById('cBiz').value.trim(),bg=document.getElementById('cBudget').value,m=document.getElementById('cMsg').value.trim();
+  if(!n||!p||!b){alert('성함, 연락처, 업종/브랜드명은 필수 입력 항목입니다.');return;}
+  var ts=new Date().toLocaleString('ko-KR');
+  // 구글 시트로 전송
+  sendToGoogleSheet({timestamp:ts,name:n,phone:p,business:b,budget:bg,message:m});
+  // 확인 시트 표시
+  var info='<strong>성함:</strong> '+n+'<br><strong>연락처:</strong> '+p+'<br><strong>업종:</strong> '+b;
+  if(bg) info+='<br><strong>월 광고비:</strong> '+bg;
+  if(m) info+='<br><strong>문의:</strong> '+m;
+  info+='<br><strong>접수일시:</strong> '+ts;
+  document.getElementById('sheetInfo').innerHTML=info;
+  document.getElementById('consultSheet').classList.add('active');
+  document.getElementById('cName').value='';document.getElementById('cPhone').value='';document.getElementById('cBiz').value='';document.getElementById('cBudget').value='';document.getElementById('cMsg').value='';
+}
+function closeSheet(){document.getElementById('consultSheet').classList.remove('active')}
+function mobileConsult(){
+  var n=document.getElementById('mName').value.trim(),p=document.getElementById('mPhone').value.trim();
+  if(!n||!p){alert('이름과 연락처를 입력해 주세요.');return;}
+  var ts=new Date().toLocaleString('ko-KR');
+  // 구글 시트로 전송
+  sendToGoogleSheet({timestamp:ts,name:n,phone:p,business:'-',budget:'-',message:'모바일 간편문의'});
+  // 확인 시트 표시
+  var info='<strong>성함:</strong> '+n+'<br><strong>연락처:</strong> '+p+'<br><strong>접수일시:</strong> '+ts;
+  document.getElementById('sheetInfo').innerHTML=info;
+  document.getElementById('consultSheet').classList.add('active');
+  document.getElementById('mName').value='';document.getElementById('mPhone').value='';
+}
+</script>
+</body>
+</html>
