@@ -630,7 +630,8 @@ document.querySelectorAll('.fade-up').forEach(el=>{el.classList.add('hidden');ob
 var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbz3Lw3sAOl7nhA4JHNwvmqgC6H1DTUfY-DYzwEG0EIbZqUZ3QrB2zmdpVqdJ1pWzbMj0g/exec';
 
 function sendToGoogleSheet(data){
-  if(!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL==='https://script.google.com/macros/s/AKfycbz3Lw3sAOl7nhA4JHNwvmqgC6H1DTUfY-DYzwEG0EIbZqUZ3QrB2zmdpVqdJ1pWzbMj0g/exec') return;
+  if(!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL.indexOf('YOUR_GOOGLE')!==-1) return;
+// ↑ 'YOUR_GOOGLE' 문자열이 포함된 경우만 차단 → 실제 URL이면 정상 실행return;
   // GET 방식 — 가장 확실하게 CORS/리다이렉트 문제 없음
   var params = '?timestamp='+encodeURIComponent(data.timestamp)
     +'&name='+encodeURIComponent(data.name)
