@@ -626,7 +626,7 @@ window.addEventListener('scroll',()=>{document.getElementById('gnb').classList.t
 const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade-up').forEach(el=>{el.classList.add('hidden');observer.observe(el)});
 // ★★★ 아래 URL을 구글 Apps Script 웹앱 URL로 교체하세요 ★★★
-var GOOGLE_SHEET_URL = 'YOUR_GOOGLE_SHEET_URL_HERE';
+var GOOGLE_SHEET_URL = 'YOUR_GOOGLE_SHEET_URL_HERE';https://script.google.com/macros/s/AKfycbz6g56NFu01tBaLZy2J2fXR3GUb4EtkP4TAX3zwbce6QeMRAYdmV2Y0k0GKMCwHcj5fuw/exec
 
 function sendToGoogleSheet(data){
   if(GOOGLE_SHEET_URL==='YOUR_GOOGLE_SHEET_URL_HERE') return;
