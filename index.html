@@ -628,7 +628,7 @@ const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.
 document.querySelectorAll('.fade-up').forEach(el=>{el.classList.add('hidden');observer.observe(el)});
 
 // ★★★ 아래 URL을 구글 Apps Script 웹앱 URL로 교체하세요 ★★★
-var GOOGLE_SHEET_URL = 'YOUR_GOOGLE_SHEET_URL_HERE';
+var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyBydWAC_znH9SXd7J0Si9fvfGCJS5fCRTBQBwhD6YdU0RvAfB29eCHh18Vw5mydxhbcw/exec';
 
 function sendToGoogleSheet(data){
   if(!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL.indexOf('YOUR_GOOGLE')!==-1) return;
