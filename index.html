@@ -627,10 +627,10 @@ const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.
 document.querySelectorAll('.fade-up').forEach(el=>{el.classList.add('hidden');observer.observe(el)});
 
 // ★★★ 아래 URL을 구글 Apps Script 웹앱 URL로 교체하세요 ★★★
-var GOOGLE_SHEET_URL = 'YOUR_GOOGLE_SHEET_URL_HERE';
+var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzMBEQ50G1YsVPoPPsYke20cVYhXm9cx0W6aFjmQzN-x_ARQUur1D1kp-shxSGsle6S/exec';
 
 function sendToGoogleSheet(data){
-  if(!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL==='YOUR_GOOGLE_SHEET_URL_HERE') return;
+  if(!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL==='https://script.google.com/macros/s/AKfycbzMBEQ50G1YsVPoPPsYke20cVYhXm9cx0W6aFjmQzN-x_ARQUur1D1kp-shxSGsle6S/exec') return;
   // GET 방식 — 가장 확실하게 CORS/리다이렉트 문제 없음
   var params = '?timestamp='+encodeURIComponent(data.timestamp)
     +'&name='+encodeURIComponent(data.name)
