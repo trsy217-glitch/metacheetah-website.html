@@ -618,7 +618,7 @@ document.querySelectorAll('.fade-up').forEach(el=>{el.classList.add('hidden');ob
 var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzBGljlWjlWe1dPA_o8yuBub3RldX9YsBL2E1QvjkWkmQNEf9985mrc6CXKaOOn1LSeOA/exec';
 
 function sendToGoogleSheet(data){
-  if(!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL.indexOf('YOUR_GOOGLE')!==-1) return;
+  if(!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL.indexOf('https://script.google.com/macros/s/AKfycbxi05ZP97h0HO0S9Gy86ROXq9D1U_Ee5B548WF3TQI3YEmuN9IWGtiI-yMY8-raUSeNtQ/exec')!==-1) return;
   
   // 숨겨진 iframe + form 방식 (가장 안정적)
   var iframeName = 'hidden_iframe_' + Date.now();
